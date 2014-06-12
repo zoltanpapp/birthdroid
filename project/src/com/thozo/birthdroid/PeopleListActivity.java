@@ -3,7 +3,9 @@ package com.thozo.birthdroid;
 import java.util.Date;
 
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.content.ComponentName;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.format.DateFormat;
@@ -46,7 +48,8 @@ public class PeopleListActivity extends Activity {
 		currentDateView.setText("Current date: " + DateFormat.format("yyyy-MM-dd", new Date()));
 
 		birthdayListView = (ListView) findViewById(R.id.birthdayListView);
-		birthdayListView.setAdapter(new BirthdayListAdapter(this, birthdays));
+		final BirthdayListAdapter birthdayListAdapter = new BirthdayListAdapter(this, birthdays);
+		birthdayListView.setAdapter(birthdayListAdapter);
 		birthdayListView.setOnItemClickListener(new OnItemClickListener() {
 			@Override
 			public void onItemClick(AdapterView<?> parent, final View view,
@@ -65,8 +68,18 @@ public class PeopleListActivity extends Activity {
 			@Override
 			public boolean onItemLongClick(AdapterView<?> parent, final View view,
 			          int position, long id) {
-			  Person person = birthdays.getPerson(position);	
-			  Toast.makeText(PeopleListActivity.this, person.birthday.toString(), Toast.LENGTH_SHORT).show();
+			  final Person person = birthdays.getPerson(position);	
+				AlertDialog dialog = new AlertDialog.Builder(PeopleListActivity.this)
+						.setMessage(getResources().getString(R.string.delete_user, person.name))
+						.setPositiveButton(R.string.delete_user_ok, new DialogInterface.OnClickListener() {
+		           public void onClick(DialogInterface dialog, int id) {
+		               birthdays.deletePerson(person);
+		               birthdayListAdapter.notifyDataSetChanged();
+		           }
+			       })
+						.setNegativeButton(R.string.delete_user_cancel, null)
+						.create();
+				dialog.show();
 			  return true;
 			}
 		});

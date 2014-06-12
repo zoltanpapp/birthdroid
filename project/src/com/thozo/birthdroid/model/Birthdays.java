@@ -29,4 +29,8 @@ public class Birthdays {
 	public Person getPerson(int position) {
 		return getPeople().get(position);
 	}
+
+	public void deletePerson(Person person) {
+		people.remove(person.name);
+	}
 }

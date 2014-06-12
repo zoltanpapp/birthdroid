@@ -9,5 +9,8 @@
     <string name="person_name">Person name</string>
     <string name="person_birthday">Birthday</string>
     <string name="person_picture">Picture</string>
+    <string name="delete_user">Do you really want to delete %1$s?</string>
+    <string name="delete_user_ok">Delete poor guy</string>
+    <string name="delete_user_cancel">Keep him</string>
 
 </resources>
