@@ -8,6 +8,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.thozo.birthdroid.model.Birthdays;
@@ -50,6 +51,10 @@ public class BirthdayListAdapter extends BaseAdapter {
 		personNameView.setText(person.name);
 		TextView personBirthday = (TextView) view.findViewById(R.id.personBirthday);
 		personBirthday.setText(DateFormat.format("MM-dd", person.birthday));
+		if (person.photo != null) {
+			ImageView personImageView = (ImageView) view.findViewById(R.id.personImageView);
+			personImageView.setImageBitmap(person.photo);
+		}
 		return view;
 	}
 

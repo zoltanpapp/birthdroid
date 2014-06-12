@@ -2,6 +2,7 @@ package com.thozo.birthdroid;
 
 import java.io.FileNotFoundException;
 import java.io.InputStream;
+import java.util.Date;
 
 import android.app.Activity;
 import android.app.DatePickerDialog;
@@ -19,6 +20,11 @@ import android.widget.DatePicker;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.ImageView;
+
+import com.thozo.birthdroid.model.Person;
 
 public class EditBirthdayActivity extends Activity {
 
@@ -28,15 +34,9 @@ public class EditBirthdayActivity extends Activity {
 		setContentView(R.layout.activity_edit_birthday);
 
 		if (savedInstanceState == null) {
-			getFragmentManager().beginTransaction()
-					.add(R.id.container, new EditBirthdayFragment()).commit();
+			getFragmentManager().beginTransaction().add(R.id.container, new EditBirthdayFragment())
+					.commit();
 		}
-	}
-
-	public void handleAddBirthdayButtonClick(View view) {
-		// Intent intent = new Intent(this, EditBirthdayActivity.class);
-		// startActivity(intent);
-		Toast.makeText(this, "est", Toast.LENGTH_SHORT).show();
 	}
 
 	/**
@@ -48,15 +48,21 @@ public class EditBirthdayActivity extends Activity {
 		private static final int SELECT_PHOTO = 100;
 		private TextView birthdayTextView;
 		private ImageView photoImageView;
+		private MainApplication mainApplication;
+		private EditText addPersonEmailView;
+		private EditText addPersonNameView;
+		private Bitmap bitmap = null;
 
 		public EditBirthdayFragment() {
 		}
 
 		@Override
-		public View onCreateView(LayoutInflater inflater, ViewGroup container,
-				Bundle savedInstanceState) {
-			View rootView = inflater.inflate(R.layout.fragment_edit_birthday,
-					container, false);
+		public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+			View rootView = inflater.inflate(R.layout.fragment_edit_birthday, container, false);
+
+			mainApplication = (MainApplication) getActivity().getApplication();
+			addPersonNameView = (EditText) rootView.findViewById(R.id.addPersonName);
+			addPersonEmailView = (EditText) rootView.findViewById(R.id.addPersonEmail);
 
 			// Birthday date picker.
 			birthdayTextView = (TextView) rootView.findViewById(R.id.birthdayTextView);
@@ -75,7 +81,22 @@ public class EditBirthdayActivity extends Activity {
 					showPhotoPickerDialog();
 				}
 			});
-			
+
+			// Save button.
+			Button saveButton = (Button) rootView.findViewById(R.id.saveButton);
+			saveButton.setOnClickListener(new View.OnClickListener() {
+				@Override
+				public void onClick(View v) {
+					Person person = new Person(
+							addPersonEmailView.getText().toString(),
+				      addPersonNameView.getText().toString(), new Date(),
+				      bitmap);
+					mainApplication.getBirthdays().addPerson(person);
+					mainApplication.storeBirthdays();
+					getActivity().finish();
+				}
+			});
+
 			return rootView;
 		}
 
@@ -109,7 +130,9 @@ public class EditBirthdayActivity extends Activity {
 						InputStream imageStream = getActivity()
 								.getContentResolver()
 								.openInputStream(selectedImage);
-						Bitmap bitmap = BitmapFactory.decodeStream(imageStream);
+						BitmapFactory.Options options = new BitmapFactory.Options();
+						options.inSampleSize = 8;
+					  bitmap = BitmapFactory.decodeStream(imageStream, null, options);
 						photoImageView.setImageBitmap(bitmap);
 					} catch (FileNotFoundException e) {
 					}
