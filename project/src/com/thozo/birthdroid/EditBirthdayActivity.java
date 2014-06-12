@@ -14,6 +14,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 public class EditBirthdayActivity extends Activity {
 
@@ -26,6 +27,12 @@ public class EditBirthdayActivity extends Activity {
 			getFragmentManager().beginTransaction()
 					.add(R.id.container, new PlaceholderFragment()).commit();
 		}
+	}
+
+	public void handleAddBirthdayButtonClick(View view) {
+		// Intent intent = new Intent(this, EditBirthdayActivity.class);
+		// startActivity(intent);
+		Toast.makeText(this, "est", Toast.LENGTH_SHORT).show();
 	}
 
 	/**
