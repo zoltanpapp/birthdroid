@@ -2,7 +2,8 @@
 <resources>
 
     <string name="app_name">BirthDroid</string>
-    <string name="action_add">Add</string>
     <string name="hello_world">Hello world!</string>
+    <string name="add_birthday">Add birthday</string>
+    <string name="title_activity_edit_birthday">EditBirthdayActivity</string>
 
 </resources>
