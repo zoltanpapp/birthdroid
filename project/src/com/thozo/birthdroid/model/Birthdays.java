@@ -1,7 +1,9 @@
 package com.thozo.birthdroid.model;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class Birthdays {
@@ -19,7 +21,8 @@ public class Birthdays {
 		people.put(person.name, person);
 	}
 	
-	public Collection<Person> getPeople() {
-		return people.values();
+	public List<Person> getPeople() {
+		// TODO(evs): store the list instead of the map.
+		return new ArrayList<Person>(people.values());
 	}
 }

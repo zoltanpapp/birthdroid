@@ -22,6 +22,11 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <activity
+            android:name="com.thozo.birthdroid.EditBirthdayActivity"
+            android:label="@string/title_activity_edit_birthday" >
+        </activity>
         
         <service android:name=".notifications.NotifierService" />
     </application>

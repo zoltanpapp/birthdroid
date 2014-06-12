@@ -14,7 +14,8 @@
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"
-        android:ems="10" />
+        android:ems="10"
+        android:text="Current date goes here" />
 
     <Button
         android:id="@+id/addBirthdayButton"
@@ -24,5 +25,13 @@
         android:layout_below="@+id/currentDateView"
         android:text="@string/add_birthday"
         android:onClick="handleAddBirthdayButtonClick" />
+
+    <ListView
+        android:id="@+id/birthdayListView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="70dp" >
+
+    </ListView>
 
 </RelativeLayout>
