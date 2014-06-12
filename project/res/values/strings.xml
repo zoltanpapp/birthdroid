@@ -14,5 +14,6 @@
     <string name="delete_user_cancel">Keep him</string>
     <string name="title_activity_main">MainActivity</string>
     <string name="explanation_how_to_add_birthdays">Tap \"Add birthday\" button to add a birthday.</string>
+    <string name="save_birthday">Save birthday</string>
 
 </resources>

@@ -57,10 +57,9 @@
         android:src="@android:drawable/gallery_thumb" />
 
     <Button
-        android:id="@+id/button1"
+        android:id="@+id/saveButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:onClick="handleAddBirthdayButtonClick"
-        android:text="@string/add_birthday" />
+        android:text="@string/save_birthday" />
 
 </LinearLayout>

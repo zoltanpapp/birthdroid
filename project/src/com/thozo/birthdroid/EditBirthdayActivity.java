@@ -2,6 +2,7 @@ package com.thozo.birthdroid;
 
 import java.io.FileNotFoundException;
 import java.io.InputStream;
+import java.util.Date;
 
 import android.app.Activity;
 import android.app.Fragment;
@@ -13,8 +14,12 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.Toast;
+
+import com.thozo.birthdroid.model.Birthdays;
+import com.thozo.birthdroid.model.Person;
 
 public class EditBirthdayActivity extends Activity {
 
@@ -24,15 +29,9 @@ public class EditBirthdayActivity extends Activity {
 		setContentView(R.layout.activity_edit_birthday);
 
 		if (savedInstanceState == null) {
-			getFragmentManager().beginTransaction()
-					.add(R.id.container, new PlaceholderFragment()).commit();
+			getFragmentManager().beginTransaction().add(R.id.container, new PlaceholderFragment())
+					.commit();
 		}
-	}
-
-	public void handleAddBirthdayButtonClick(View view) {
-		// Intent intent = new Intent(this, EditBirthdayActivity.class);
-		// startActivity(intent);
-		Toast.makeText(this, "est", Toast.LENGTH_SHORT).show();
 	}
 
 	/**
@@ -42,14 +41,20 @@ public class EditBirthdayActivity extends Activity {
 		private static final int SELECT_PHOTO = 100;
 		private ImageView photoImageView;
 
+		private Birthdays birthdays;
+		private EditText addPersonEmailView;
+		private EditText addPersonNameView;
+
 		public PlaceholderFragment() {
 		}
 
 		@Override
-		public View onCreateView(LayoutInflater inflater, ViewGroup container,
-				Bundle savedInstanceState) {
-			View rootView = inflater.inflate(R.layout.fragment_edit_birthday,
-					container, false);
+		public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+			View rootView = inflater.inflate(R.layout.fragment_edit_birthday, container, false);
+
+			birthdays = ((MainApplication) getActivity().getApplication()).getBirthdays();
+			addPersonNameView = (EditText) rootView.findViewById(R.id.addPersonName);
+			addPersonEmailView = (EditText) rootView.findViewById(R.id.addPersonEmail);
 
 			photoImageView = (ImageView) rootView.findViewById(R.id.photoImageView);
 			photoImageView.setOnClickListener(new View.OnClickListener() {
@@ -58,6 +63,18 @@ public class EditBirthdayActivity extends Activity {
 					Intent photoPickerIntent = new Intent(Intent.ACTION_PICK);
 					photoPickerIntent.setType("image/*");
 					startActivityForResult(photoPickerIntent, SELECT_PHOTO);
+				}
+			});
+
+			Button saveButton = (Button) rootView.findViewById(R.id.saveButton);
+			saveButton.setOnClickListener(new View.OnClickListener() {
+				@Override
+				public void onClick(View v) {
+					Person person = new Person(
+							addPersonEmailView.getText().toString(),
+				      addPersonNameView.getText().toString(), new Date(), null);
+					birthdays.addPerson(person);
+					getActivity().finish();
 				}
 			});
 

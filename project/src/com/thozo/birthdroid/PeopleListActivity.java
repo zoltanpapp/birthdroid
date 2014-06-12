@@ -28,22 +28,15 @@ public class PeopleListActivity extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_people_list);
-
-		BirthdayOpenHelper birthdayOpenHelper = new BirthdayOpenHelper(this);
-		final Birthdays birthdays = birthdayOpenHelper.readBirthdays();
-//		birthdays.addPerson(new Person(
-//				"evs@google.com", "Nikolay Zherebtsov", new Date(0, 9, 7), null /* photo */));
-//		birthdays.addPerson(new Person(
-//				"wittek@google.com", "Thomas Wittek", new Date(0, 5, 12), null /* photo */));
-//		birthdays.addPerson(new Person(
-//				"zoltanp@google.com", "Zoltan Papp", new Date(0, 5, 12), null /* photo */));
-//		birthdayOpenHelper.storeBirthdays(birthdays);
+		
+		final Birthdays birthdays = ((MainApplication) getApplication()).getBirthdays();
 				
 		currentDateView = (TextView) findViewById(R.id.currentDateView);
 		currentDateView.setText("Current date: " + DateFormat.format("yyyy-MM-dd", new Date()));
 
 		birthdayListView = (ListView) findViewById(R.id.birthdayListView);
 		final BirthdayListAdapter birthdayListAdapter = new BirthdayListAdapter(this, birthdays);
+		birthdays.attachAdapter(birthdayListAdapter);
 		birthdayListView.setAdapter(birthdayListAdapter);
 		birthdayListView.setOnItemClickListener(new OnItemClickListener() {
 			@Override
