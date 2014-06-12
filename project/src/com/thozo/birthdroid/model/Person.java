@@ -3,6 +3,7 @@ package com.thozo.birthdroid.model;
 import java.util.Date;
 import java.util.GregorianCalendar;
 import android.graphics.Bitmap;
+import android.media.ThumbnailUtils;
 
 public class Person implements Comparable<Person> {
 	private final static int THUMBNAIL_SIZE = 64;
@@ -22,8 +23,8 @@ public class Person implements Comparable<Person> {
 
 	/** Sets the photo, and resizes it to a thumbnail. */
 	public void setPhoto(Bitmap photo) {
-		Bitmap scaledBitmap = Bitmap.createScaledBitmap(
-				photo, THUMBNAIL_SIZE, THUMBNAIL_SIZE, false);
+		Bitmap scaledBitmap = ThumbnailUtils.extractThumbnail(
+				photo, THUMBNAIL_SIZE, THUMBNAIL_SIZE);
 		this.photo = scaledBitmap;
 	}
 
