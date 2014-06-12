@@ -17,7 +17,6 @@ import android.widget.TextView;
 
 import com.thozo.birthdroid.model.Birthdays;
 import com.thozo.birthdroid.model.Person;
-import com.thozo.birthdroid.persistance.BirthdayOpenHelper;
 
 public class PeopleListActivity extends Activity {
 
@@ -29,7 +28,8 @@ public class PeopleListActivity extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_people_list);
 		
-		final Birthdays birthdays = ((MainApplication) getApplication()).getBirthdays();
+		final MainApplication mainApplication = (MainApplication) getApplication();
+		final Birthdays birthdays = mainApplication.getBirthdays();
 				
 		currentDateView = (TextView) findViewById(R.id.currentDateView);
 		currentDateView.setText("Current date: " + DateFormat.format("yyyy-MM-dd", new Date()));
@@ -62,6 +62,7 @@ public class PeopleListActivity extends Activity {
 						.setPositiveButton(R.string.delete_user_ok, new DialogInterface.OnClickListener() {
 		           public void onClick(DialogInterface dialog, int id) {
 		               birthdays.deletePerson(person);
+		               mainApplication.storeBirthdays();
 		               birthdayListAdapter.notifyDataSetChanged();
 		           }
 			       })
