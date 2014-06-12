@@ -3,6 +3,8 @@ package com.thozo.birthdroid;
 import android.app.Activity;
 import android.os.Bundle;
 import android.view.Menu;
+import android.view.MenuItem;
+import android.widget.Toast;
 
 import com.thozo.birthdroid.model.Birthdays;
 import com.thozo.birthdroid.persistance.BirthdayOpenHelper;
@@ -29,4 +31,14 @@ public class PeopleListActivity extends Activity {
 		return true;
 	}
 
+	@Override
+	public boolean onOptionsItemSelected(MenuItem item) {
+		// Handle item selection
+		switch (item.getItemId()) {
+		case R.id.action_add:
+			Toast.makeText(this, "Add person!", Toast.LENGTH_SHORT).show();
+		default:
+			return super.onOptionsItemSelected(item);
+		}
+	}
 }
