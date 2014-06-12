@@ -27,7 +27,7 @@ public class BirthdayListAdapter extends BaseAdapter {
 	@Override
 	public View getView(int position, View convertView, ViewGroup parent) {
 		if (birthdays.size() > 0) {
-		  return createPersonListItem(position, parent);
+			return createPersonListItem(position, parent);
 		} else {
 			return createExplanationView(parent);
 		}
@@ -36,7 +36,8 @@ public class BirthdayListAdapter extends BaseAdapter {
 	private View createExplanationView(ViewGroup parent) {
 		LayoutInflater inflater = (LayoutInflater) context
 				.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-		TextView view = (TextView) inflater.inflate(R.layout.explanation_how_to_add_birthdays, parent, false);
+		TextView view = (TextView) inflater.inflate(R.layout.explanation_how_to_add_birthdays, parent,
+				false);
 		return view;
 	}
 
