@@ -6,6 +6,7 @@
     <string name="add_birthday">Add birthday</string>
     <string name="title_activity_edit_birthday">EditBirthdayActivity</string>
     <string name="person_name">Person name</string>
+    <string name="person_email">Person email</string>
     <string name="person_birthday">Birthday</string>
     <string name="person_picture">Picture</string>
     <string name="delete_user">Do you really want to delete %1$s?</string>
