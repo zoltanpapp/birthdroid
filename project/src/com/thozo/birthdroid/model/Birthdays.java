@@ -25,4 +25,8 @@ public class Birthdays {
 		// TODO(evs): store the list instead of the map.
 		return new ArrayList<Person>(people.values());
 	}
+
+	public Person getPerson(int position) {
+		return getPeople().get(position);
+	}
 }

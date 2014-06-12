@@ -10,9 +10,14 @@ import android.text.format.DateFormat;
 import android.util.Log;
 import android.view.Menu;
 import android.view.View;
+import android.widget.Adapter;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
+import android.widget.AdapterView.OnItemLongClickListener;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.thozo.birthdroid.model.Birthdays;
 import com.thozo.birthdroid.notifications.NotifierService;
@@ -31,7 +36,7 @@ public class PeopleListActivity extends Activity {
 		setContentView(R.layout.activity_people_list);
 
 		BirthdayOpenHelper birthdayOpenHelper = new BirthdayOpenHelper(this);
-		Birthdays birthdays = birthdayOpenHelper.readBirthdays();
+		final Birthdays birthdays = birthdayOpenHelper.readBirthdays();
 		birthdays.putPerson(new Person("Nikolay Zherebtsov", new Date(0, 9, 7)));
 		birthdays.putPerson(new Person("Zoltan Papp", new Date(0, 11, 31)));
 		birthdays.putPerson(new Person("Thomas Wittek", new Date(0, 2, 22)));
@@ -42,6 +47,23 @@ public class PeopleListActivity extends Activity {
 
 		birthdayListView = (ListView) findViewById(R.id.birthdayListView);
 		birthdayListView.setAdapter(new BirthdayListAdapter(this, birthdays));
+		birthdayListView.setOnItemClickListener(new OnItemClickListener() {
+			@Override
+			public void onItemClick(AdapterView<?> parent, final View view,
+			          int position, long id) {
+			  Person person = birthdays.getPerson(position);	
+			  Toast.makeText(PeopleListActivity.this, person.name, Toast.LENGTH_SHORT).show();
+			}
+		});
+		birthdayListView.setOnItemLongClickListener(new OnItemLongClickListener() {
+			@Override
+			public boolean onItemLongClick(AdapterView<?> parent, final View view,
+			          int position, long id) {
+			  Person person = birthdays.getPerson(position);	
+			  Toast.makeText(PeopleListActivity.this, person.birthday.toString(), Toast.LENGTH_SHORT).show();
+			  return true;
+			}
+		});
 	}
 	
 	@Override

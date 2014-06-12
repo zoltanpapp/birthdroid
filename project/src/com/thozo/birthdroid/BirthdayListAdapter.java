@@ -1,19 +1,14 @@
 package com.thozo.birthdroid;
 
-import java.util.ArrayList;
-
-import com.thozo.birthdroid.model.Birthdays;
-import com.thozo.birthdroid.model.Person;
-
 import android.content.Context;
-import android.database.DataSetObserver;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
 import android.widget.BaseAdapter;
-import android.widget.ListAdapter;
 import android.widget.TextView;
+
+import com.thozo.birthdroid.model.Birthdays;
+import com.thozo.birthdroid.model.Person;
 
 public class BirthdayListAdapter extends BaseAdapter {
 
@@ -42,13 +37,13 @@ public class BirthdayListAdapter extends BaseAdapter {
 	}
 
 	@Override
-	public Object getItem(int arg0) {
+	public Person getItem(int position) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public long getItemId(int arg0) {
+	public long getItemId(int position) {
 		// TODO Auto-generated method stub
 		return 0;
 	}
