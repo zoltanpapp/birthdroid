@@ -61,3 +61,5 @@ project/.metadata/.plugins/org.eclipse.jdt.ui/QualifiedTypeNameHistory.xml
 project/.metadata/.plugins/org.eclipse.ui.workbench/dialog_settings.xml
 
 project/.metadata/.plugins/org.eclipse.ui.workbench/workingsets.xml
+
+project/.classpath
