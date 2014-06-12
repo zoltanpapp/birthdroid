@@ -1,5 +1,7 @@
 package com.thozo.birthdroid.persistance;
 
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -10,6 +12,7 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 
 import com.thozo.birthdroid.model.Birthdays;
 import com.thozo.birthdroid.model.Person;
@@ -50,8 +53,9 @@ public class BirthdayOpenHelper extends SQLiteOpenHelper {
 			values.put("email", person.email);
 			values.put("name", person.name);
 			values.put("birthday", person.birthday.toGMTString());
-			// TODO.
-//			values.put("photo", person.birthday.toGMTString());
+			ByteArrayOutputStream baos = new ByteArrayOutputStream(); 
+			person.photo.compress(Bitmap.CompressFormat.JPEG, 100, baos);
+			values.put("photo", baos.toByteArray());
 			this.getWritableDatabase().insert("birthdays", null /* nullColumnHack */, values);
 		}
 		close();
@@ -73,7 +77,8 @@ public class BirthdayOpenHelper extends SQLiteOpenHelper {
 			String name = cursor.getString(1);
 			Date birthday = new Date(cursor.getString(2));
 			byte[] photoBytes = cursor.getBlob(3);
-			Bitmap photo = null; // TODO
+			ByteArrayInputStream bais = new ByteArrayInputStream(photoBytes);
+			Bitmap photo = BitmapFactory.decodeStream(bais);
 			people.add(new Person(email, name, birthday, photo));
 		    cursor.moveToNext();
 		}
