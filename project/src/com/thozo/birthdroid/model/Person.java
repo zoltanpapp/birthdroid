@@ -5,6 +5,8 @@ import java.util.GregorianCalendar;
 import android.graphics.Bitmap;
 
 public class Person implements Comparable<Person> {
+	private final static int THUMBNAIL_SIZE = 64;
+			
 	/** The email doubles as the ID. */
 	public String email;
 	public String name;
@@ -15,12 +17,14 @@ public class Person implements Comparable<Person> {
 		this.email = email;
 		this.name = name;
 		this.birthday = birthday;
-		this.photo = photo;
+		setPhoto(photo);
 	}
 
 	/** Sets the photo, and resizes it to a thumbnail. */
 	public void setPhoto(Bitmap photo) {
-		this.photo = photo;
+		Bitmap scaledBitmap = Bitmap.createScaledBitmap(
+				photo, THUMBNAIL_SIZE, THUMBNAIL_SIZE, false);
+		this.photo = scaledBitmap;
 	}
 
 	private int getDaysUntilBirthday() {
