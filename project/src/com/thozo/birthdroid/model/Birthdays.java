@@ -2,6 +2,7 @@ package com.thozo.birthdroid.model;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
 
 public class Birthdays {
@@ -14,6 +15,7 @@ public class Birthdays {
 	/** Adds a person. */
 	public void addPerson(Person person) {
 		persons.add(person);
+		Collections.sort(persons);
 	}
 
 	public List<Person> getPersons() {

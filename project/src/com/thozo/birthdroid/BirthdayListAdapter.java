@@ -1,6 +1,9 @@
 package com.thozo.birthdroid;
 
+import java.util.Date;
+
 import android.content.Context;
+import android.text.format.DateFormat;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -40,9 +43,12 @@ public class BirthdayListAdapter extends BaseAdapter {
 	private View createPersonListItem(int position, ViewGroup parent) {
 		LayoutInflater inflater = (LayoutInflater) context
 				.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-		TextView view = (TextView) inflater.inflate(R.layout.person_item, parent, false);
+		ViewGroup view = (ViewGroup) inflater.inflate(R.layout.person_item, parent, false);
 		Person person = birthdays.getPerson(position);
-		view.setText(person.name);
+		TextView personNameView = (TextView) view.findViewById(R.id.personName);
+		personNameView.setText(person.name);
+		TextView personBirthday = (TextView) view.findViewById(R.id.personBirthday);
+		personBirthday.setText(DateFormat.format("MM-dd", person.birthday));
 		return view;
 	}
 
