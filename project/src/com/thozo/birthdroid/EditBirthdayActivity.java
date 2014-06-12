@@ -1,15 +1,15 @@
 package com.thozo.birthdroid;
 
 import android.app.Activity;
-import android.app.ActionBar;
 import android.app.Fragment;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.os.Build;
+import android.widget.AdapterView;
+import android.widget.ImageView;
+import android.widget.Toast;
 
 public class EditBirthdayActivity extends Activity {
 
@@ -37,6 +37,15 @@ public class EditBirthdayActivity extends Activity {
 				Bundle savedInstanceState) {
 			View rootView = inflater.inflate(R.layout.fragment_edit_birthday,
 					container, false);
+			
+			ImageView photoImageView = (ImageView) rootView.findViewById(R.id.photoImageView);
+			photoImageView.setOnClickListener(new View.OnClickListener() {
+				@Override
+				public void onClick(View v) {
+					Toast.makeText(getActivity(), "Select photo!", Toast.LENGTH_LONG).show();
+				}
+			});
+			
 			return rootView;
 		}
 	}

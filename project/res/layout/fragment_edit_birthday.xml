@@ -32,4 +32,12 @@
         android:layout_marginTop="89dp"
         android:text="@string/person_picture" />
 
+    <ImageView
+        android:id="@+id/photoImageView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/textView3"
+        android:layout_below="@+id/textView3"
+        android:src="@android:drawable/gallery_thumb" />
+
 </RelativeLayout>
