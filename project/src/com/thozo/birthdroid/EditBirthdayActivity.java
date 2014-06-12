@@ -18,7 +18,6 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 
-import com.thozo.birthdroid.model.Birthdays;
 import com.thozo.birthdroid.model.Person;
 
 public class EditBirthdayActivity extends Activity {
@@ -41,7 +40,7 @@ public class EditBirthdayActivity extends Activity {
 		private static final int SELECT_PHOTO = 100;
 		private ImageView photoImageView;
 
-		private Birthdays birthdays;
+		private MainApplication mainApplication;
 		private EditText addPersonEmailView;
 		private EditText addPersonNameView;
 
@@ -52,7 +51,7 @@ public class EditBirthdayActivity extends Activity {
 		public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 			View rootView = inflater.inflate(R.layout.fragment_edit_birthday, container, false);
 
-			birthdays = ((MainApplication) getActivity().getApplication()).getBirthdays();
+			mainApplication = (MainApplication) getActivity().getApplication();
 			addPersonNameView = (EditText) rootView.findViewById(R.id.addPersonName);
 			addPersonEmailView = (EditText) rootView.findViewById(R.id.addPersonEmail);
 
@@ -73,7 +72,8 @@ public class EditBirthdayActivity extends Activity {
 					Person person = new Person(
 							addPersonEmailView.getText().toString(),
 				      addPersonNameView.getText().toString(), new Date(), null);
-					birthdays.addPerson(person);
+					mainApplication.getBirthdays().addPerson(person);
+					mainApplication.storeBirthdays();
 					getActivity().finish();
 				}
 			});
