@@ -96,7 +96,9 @@ public class EditBirthdayActivity extends Activity {
 						InputStream imageStream = getActivity()
 								.getContentResolver()
 								.openInputStream(selectedImage);
-					  bitmap = BitmapFactory.decodeStream(imageStream);
+						BitmapFactory.Options options = new BitmapFactory.Options();
+						options.inSampleSize = 8;
+					  bitmap = BitmapFactory.decodeStream(imageStream, null, options);
 						photoImageView.setImageBitmap(bitmap);
 					} catch (FileNotFoundException e) {
 					}
