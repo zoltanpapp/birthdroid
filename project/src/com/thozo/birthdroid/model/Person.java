@@ -23,9 +23,13 @@ public class Person implements Comparable<Person> {
 
 	/** Sets the photo, and resizes it to a thumbnail. */
 	public void setPhoto(Bitmap photo) {
-		Bitmap scaledBitmap = ThumbnailUtils.extractThumbnail(
-				photo, THUMBNAIL_SIZE, THUMBNAIL_SIZE);
-		this.photo = scaledBitmap;
+		if (photo == null) {
+			this.photo = null;
+		} else {
+			Bitmap scaledBitmap = ThumbnailUtils.extractThumbnail(
+					photo, THUMBNAIL_SIZE, THUMBNAIL_SIZE);
+			this.photo = scaledBitmap;
+		}
 	}
 
 	private int getDaysUntilBirthday() {
