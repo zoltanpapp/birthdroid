@@ -40,7 +40,7 @@ public class NotifierService extends IntentService {
 
 		BirthdayOpenHelper helper = new BirthdayOpenHelper(this);
 		Birthdays birthdays = helper.readBirthdays();
-		for (Person person : birthdays.getPeople()) {
+		for (Person person : birthdays.getPersons()) {
 			notifier.notifyUser(person);
 		}
 		
