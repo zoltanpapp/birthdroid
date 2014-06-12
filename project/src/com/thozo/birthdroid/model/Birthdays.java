@@ -1,16 +1,25 @@
 package com.thozo.birthdroid.model;
 
-import java.util.ArrayList;
 import java.util.Collection;
-import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
 
 public class Birthdays {
-	public Collection<Person> people;
+	private Map<String, Person> people;
 	
-	public Birthdays() {
-		this.people = new ArrayList<Person>(3);
-		people.add(new Person("Nikolay Zherebtsov", new Date(0, 9, 7)));
-		people.add(new Person("Zoltan Papp", new Date(0, 11, 31)));
-		people.add(new Person("Thomas Wittek", new Date(0, 2, 22)));
+	public Birthdays(Collection<Person> people) {
+		this.people = new HashMap<String, Person>();
+		for (Person person : people) {
+			putPerson(person);
+		}
+	}
+	
+	/** Adds a person. Replaces it if a person with that name already exist. */
+	public void putPerson(Person person) {
+		people.put(person.name, person);
+	}
+	
+	public Collection<Person> getPeople() {
+		return people.values();
 	}
 }
