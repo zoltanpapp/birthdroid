@@ -31,9 +31,12 @@ public class PeopleListActivity extends Activity {
 
 		BirthdayOpenHelper birthdayOpenHelper = new BirthdayOpenHelper(this);
 		final Birthdays birthdays = birthdayOpenHelper.readBirthdays();
-		birthdays.putPerson(new Person("Nikolay Zherebtsov", new Date(0, 9, 7)));
-		birthdays.putPerson(new Person("Zoltan Papp", new Date(0, 11, 31)));
-		birthdays.putPerson(new Person("Thomas Wittek", new Date(0, 2, 22)));
+		birthdays.putPerson(new Person(
+				"evs@google.com", "Nikolay Zherebtsov", new Date(0, 9, 7), null /* photo */));
+		birthdays.putPerson(new Person(
+				"zoltanp@google.com", "Zoltan Papp", new Date(0, 11, 31), null /* photo */));
+		birthdays.putPerson(new Person(
+				"wittek@google.com", "Thomas Wittek", new Date(0, 2, 22), null /* photo */));
 //		birthdayOpenHelper.storeBirthdays(birthdays);
 				
 		currentDateView = (TextView) findViewById(R.id.currentDateView);
