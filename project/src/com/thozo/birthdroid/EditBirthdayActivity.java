@@ -48,6 +48,7 @@ public class EditBirthdayActivity extends Activity {
 		private MainApplication mainApplication;
 		private EditText addPersonEmailView;
 		private EditText addPersonNameView;
+		private Date birthday = null;
 		private Bitmap bitmap = null;
 
 		public EditBirthdayFragment() {
@@ -86,8 +87,9 @@ public class EditBirthdayActivity extends Activity {
 				public void onClick(View v) {
 					Person person = new Person(
 							addPersonEmailView.getText().toString(),
-				      addPersonNameView.getText().toString(), new Date(),
-				      bitmap);
+							addPersonNameView.getText().toString(),
+							birthday,
+							bitmap);
 					mainApplication.getBirthdays().addPerson(person);
 					mainApplication.storeBirthdays();
 					getActivity().finish();
@@ -104,8 +106,8 @@ public class EditBirthdayActivity extends Activity {
 		}
 		
 		public void onDateSet(DatePicker view, int year, int month, int day) {
+			birthday = new Date(year, month, day);
 			birthdayTextView.setText((month + 1) + "-" + day);
-			// TODO(wittek): Set on Model.
 		}
 		
 		private void showPhotoPickerDialog() {
