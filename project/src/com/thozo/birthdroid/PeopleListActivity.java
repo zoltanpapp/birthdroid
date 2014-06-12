@@ -9,6 +9,7 @@ import android.text.format.DateFormat;
 import android.app.Activity;
 import android.os.Bundle;
 import android.view.Menu;
+import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
@@ -38,9 +39,9 @@ public class PeopleListActivity extends Activity {
 		addBirthdayButton = (Button) findViewById(R.id.addBirthdayButton);
 	}
 	
-	public void handleAddBirthdayButtonClick() {
-//		Intent intent = new Intent(this, EditBirthday.class);
-//		startActivity(intent);
+	public void handleAddBirthdayButtonClick(View view) {
+		Intent intent = new Intent(this, EditBirthdayActivity.class);
+		startActivity(intent);
 	}
 
 	@Override
