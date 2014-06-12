@@ -59,7 +59,8 @@ public class Notifier {
 		return new NotificationCompat.Builder(ctx)
 			.setSmallIcon(R.drawable.ic_launcher)
 			.setContentTitle(persons.get(0).name + " and " + (persons.size() - 1)
-					+ " others have birthday!")
+					+ (persons.size() > 2 ? "others" : "other")
+					+ " have birthday!")
 			.setContentText("Send them an email to make him feel special.")
 			.setAutoCancel(true);
 	}
