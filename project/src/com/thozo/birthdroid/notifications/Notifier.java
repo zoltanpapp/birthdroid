@@ -13,11 +13,9 @@ import com.thozo.birthdroid.model.Person;
 public class Notifier {
 
 	private Context ctx;
-	private int count;
 	
 	Notifier(Context ctx) {
 		this.ctx = ctx;
-		this.count = 0;
 	}
 
 	public void notifyUser(Person person) {
@@ -36,8 +34,7 @@ public class Notifier {
 			.setContentTitle(person.name + " haz birthday!")
 			.setContentText("Send him an email to make him feel special.")
 			.setContentIntent(pendingIntent)
-			.setAutoCancel(true)
-			.setNumber(++count);
+			.setAutoCancel(true);
 
 		NotificationManager notificationMgr = 
 		        (NotificationManager) ctx.getSystemService(Activity.NOTIFICATION_SERVICE);
