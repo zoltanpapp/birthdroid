@@ -6,5 +6,8 @@
     <string name="hello_world">Hello world!</string>
     <string name="add_birthday">Add birthday</string>
     <string name="title_activity_edit_birthday">EditBirthdayActivity</string>
+    <string name="person_name">Person name</string>
+    <string name="person_birthday">Birthday</string>
+    <string name="person_picture">Picture</string>
 
 </resources>
