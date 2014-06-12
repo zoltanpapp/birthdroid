@@ -18,7 +18,7 @@ import com.thozo.birthdroid.model.Birthdays;
 import com.thozo.birthdroid.model.Person;
 
 public class BirthdayOpenHelper extends SQLiteOpenHelper {
-    private static final int DATABASE_VERSION = 3;
+    private static final int DATABASE_VERSION = 4;
     private static final String DATABASE_NAME = "birthdroid";
     
     public BirthdayOpenHelper(Context context) {
@@ -32,7 +32,7 @@ public class BirthdayOpenHelper extends SQLiteOpenHelper {
                 "email TEXT, " +
                 "name TEXT, " +
                 // Note that SQLite doesn't have a DATE type, so we use a String.
-                "birthday TEXT " +
+                "birthday TEXT, " +
                 "photo BLOB" +
                 ");");
 	}
@@ -54,8 +54,10 @@ public class BirthdayOpenHelper extends SQLiteOpenHelper {
 			values.put("name", person.name);
 			values.put("birthday", person.birthday.toGMTString());
 			ByteArrayOutputStream baos = new ByteArrayOutputStream(); 
-			person.photo.compress(Bitmap.CompressFormat.JPEG, 100, baos);
-			values.put("photo", baos.toByteArray());
+			if (person.photo != null) {
+				person.photo.compress(Bitmap.CompressFormat.JPEG, 100, baos);
+				values.put("photo", baos.toByteArray());
+			}
 			this.getWritableDatabase().insert("birthdays", null /* nullColumnHack */, values);
 		}
 		close();
@@ -64,7 +66,7 @@ public class BirthdayOpenHelper extends SQLiteOpenHelper {
 	public Birthdays readBirthdays() {
 		Cursor cursor = this.getReadableDatabase().query(
 				"birthdays" /* table */,
-				new String[]{"name", "birthday"} /* columns */,
+				new String[]{"email", "name", "birthday", "photo"} /* columns */,
 				null /* selection */,
 				null /* selectionArgs */,
 				null /* groupBy */,
@@ -76,9 +78,12 @@ public class BirthdayOpenHelper extends SQLiteOpenHelper {
 			String email = cursor.getString(0);
 			String name = cursor.getString(1);
 			Date birthday = new Date(cursor.getString(2));
-			byte[] photoBytes = cursor.getBlob(3);
-			ByteArrayInputStream bais = new ByteArrayInputStream(photoBytes);
-			Bitmap photo = BitmapFactory.decodeStream(bais);
+			Bitmap photo = null;
+			if (!cursor.isNull(3)) {
+				byte[] photoBytes = cursor.getBlob(3);
+				ByteArrayInputStream bais = new ByteArrayInputStream(photoBytes);
+				photo = BitmapFactory.decodeStream(bais);
+			}
 			people.add(new Person(email, name, birthday, photo));
 		    cursor.moveToNext();
 		}

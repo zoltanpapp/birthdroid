@@ -6,10 +6,12 @@ import java.util.Date;
 import android.app.AlarmManager;
 import android.app.IntentService;
 import android.app.PendingIntent;
+import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.os.IBinder;
 import android.util.Log;
+import android.widget.Toast;
 
 import com.thozo.birthdroid.model.Birthdays;
 import com.thozo.birthdroid.model.Person;
@@ -22,7 +24,11 @@ public class NotifierService extends IntentService {
 	 */
 	public static void trigger(Context context) {
 		Intent serviceIntent = new Intent(context, NotifierService.class);
-		context.startService(serviceIntent);
+		ComponentName name = context.startService(serviceIntent);
+		if (name == null) {
+			Toast.makeText(context, "Could not trigger service!", Toast.LENGTH_LONG).show();
+		}
+
 	}
 
 	public NotifierService() {
@@ -56,11 +62,12 @@ public class NotifierService extends IntentService {
 		for (Person person : birthdays.getPersons()) {
 			if (shouldNotify(person)) {
 				Log.i("birthdroid", person.name + " has birthday today");
-				notifier.notifyUser(person);
+				notifier.addPerson(person);
 			} else {
 				Log.i("birthdroid", person.name + " will not be notified.");
 			}
 		}
+		notifier.showNotifications();
 
 		scheduleAlarm();
 	}
