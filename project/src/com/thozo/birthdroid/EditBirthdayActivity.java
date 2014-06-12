@@ -44,6 +44,7 @@ public class EditBirthdayActivity extends Activity {
 		private Birthdays birthdays;
 		private EditText addPersonEmailView;
 		private EditText addPersonNameView;
+		private Bitmap bitmap = null;
 
 		public PlaceholderFragment() {
 		}
@@ -72,7 +73,8 @@ public class EditBirthdayActivity extends Activity {
 				public void onClick(View v) {
 					Person person = new Person(
 							addPersonEmailView.getText().toString(),
-				      addPersonNameView.getText().toString(), new Date(), null);
+				      addPersonNameView.getText().toString(), new Date(),
+				      bitmap);
 					birthdays.addPerson(person);
 					getActivity().finish();
 				}
@@ -94,7 +96,7 @@ public class EditBirthdayActivity extends Activity {
 						InputStream imageStream = getActivity()
 								.getContentResolver()
 								.openInputStream(selectedImage);
-						Bitmap bitmap = BitmapFactory.decodeStream(imageStream);
+					  bitmap = BitmapFactory.decodeStream(imageStream);
 						photoImageView.setImageBitmap(bitmap);
 					} catch (FileNotFoundException e) {
 					}
