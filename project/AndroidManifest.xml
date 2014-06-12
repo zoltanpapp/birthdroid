@@ -14,21 +14,25 @@
         android:label="@string/app_name"
         android:theme="@style/AppTheme" >
         <activity
-            android:name="com.thozo.birthdroid.PeopleListActivity"
-            android:label="@string/app_name" >
+            android:name="com.thozo.birthdroid.MainActivity"
+            android:label="@string/title_activity_main" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
         <activity
             android:name="com.thozo.birthdroid.EditBirthdayActivity"
             android:label="@string/title_activity_edit_birthday" >
         </activity>
-        
-        <service android:name=".notifications.NotifierService" />
+
+        <service android:name="com.thozo.birthdroid.notifications.NotifierService" />
+
+        <activity
+            android:name="com.thozo.birthdroid.PeopleListActivity"
+            android:label="@string/app_name" >
+        </activity>
     </application>
 
 </manifest>

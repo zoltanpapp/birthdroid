@@ -9,5 +9,6 @@
     <string name="person_name">Person name</string>
     <string name="person_birthday">Birthday</string>
     <string name="person_picture">Picture</string>
+    <string name="title_activity_main">MainActivity</string>
 
 </resources>

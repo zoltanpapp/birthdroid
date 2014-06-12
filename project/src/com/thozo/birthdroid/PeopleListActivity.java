@@ -1,13 +1,15 @@
 package com.thozo.birthdroid;
 
+import java.util.Calendar;
 import java.util.Date;
 
 import android.app.Activity;
-import android.content.ComponentName;
+import android.app.AlarmManager;
+import android.app.PendingIntent;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.format.DateFormat;
-import android.util.Log;
 import android.view.Menu;
 import android.view.View;
 import android.widget.Button;
@@ -16,7 +18,6 @@ import android.widget.TextView;
 
 import com.thozo.birthdroid.model.Birthdays;
 import com.thozo.birthdroid.notifications.NotifierService;
-import com.thozo.birthdroid.model.Person;
 import com.thozo.birthdroid.persistance.BirthdayOpenHelper;
 
 public class PeopleListActivity extends Activity {
@@ -32,9 +33,9 @@ public class PeopleListActivity extends Activity {
 
 		BirthdayOpenHelper birthdayOpenHelper = new BirthdayOpenHelper(this);
 		Birthdays birthdays = birthdayOpenHelper.readBirthdays();
-		birthdays.putPerson(new Person("Nikolay Zherebtsov", new Date(0, 9, 7)));
-		birthdays.putPerson(new Person("Zoltan Papp", new Date(0, 11, 31)));
-		birthdays.putPerson(new Person("Thomas Wittek", new Date(0, 2, 22)));
+//		birthdays.putPerson(new Person("Nikolay Zherebtsov", new Date(0, 9, 7)));
+//		birthdays.putPerson(new Person("Zoltan Papp", new Date(0, 11, 31)));
+//		birthdays.putPerson(new Person("Thomas Wittek", new Date(0, 2, 22)));
 //		birthdayOpenHelper.storeBirthdays(birthdays);
 				
 		currentDateView = (TextView) findViewById(R.id.currentDateView);
@@ -48,9 +49,8 @@ public class PeopleListActivity extends Activity {
 	protected void onStart() {
 		// TODO Auto-generated method stub
 		super.onStart();
-		Intent startServiceIntent = new Intent(this, NotifierService.class);
-		ComponentName name = startService(startServiceIntent);
-		Log.e("birthdroid", "name: " + name);
+		
+
 	}
 	
 	public void handleAddBirthdayButtonClick(View view) {
