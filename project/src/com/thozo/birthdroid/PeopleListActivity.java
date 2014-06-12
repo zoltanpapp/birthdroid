@@ -8,6 +8,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.format.DateFormat;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
@@ -53,7 +54,7 @@ public class PeopleListActivity extends Activity {
 
 				Intent intent = new Intent(Intent.ACTION_SEND);
 				intent.setType("text/html");
-				intent.putExtra(Intent.EXTRA_EMAIL, person.email);
+				intent.putExtra(Intent.EXTRA_EMAIL, new String[]{person.email});
 				intent.putExtra(Intent.EXTRA_SUBJECT, person.name + ", happy birthday!");
 				intent.putExtra(Intent.EXTRA_TEXT, "Let's go out and get some drinks!");
 				startActivity(intent);
