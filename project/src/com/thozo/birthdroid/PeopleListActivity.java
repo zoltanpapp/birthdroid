@@ -17,6 +17,7 @@ import android.widget.TextView;
 
 import com.thozo.birthdroid.model.Birthdays;
 import com.thozo.birthdroid.model.Person;
+import com.thozo.birthdroid.notifications.NotifierService;
 
 public class PeopleListActivity extends Activity {
 
@@ -78,6 +79,13 @@ public class PeopleListActivity extends Activity {
 	protected void onStart() {
 		// TODO Auto-generated method stub
 		super.onStart();
+	}
+	
+	@Override
+	protected void onResume() {
+		super.onResume();
+		// Initial trigger of the service.
+		NotifierService.trigger(this);
 	}
 	
 	public void handleAddBirthdayButtonClick(View view) {
