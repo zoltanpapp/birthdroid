@@ -4,16 +4,20 @@ import java.io.FileNotFoundException;
 import java.io.InputStream;
 
 import android.app.Activity;
+import android.app.DatePickerDialog;
 import android.app.Fragment;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.DatePicker;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 public class EditBirthdayActivity extends Activity {
@@ -25,7 +29,7 @@ public class EditBirthdayActivity extends Activity {
 
 		if (savedInstanceState == null) {
 			getFragmentManager().beginTransaction()
-					.add(R.id.container, new PlaceholderFragment()).commit();
+					.add(R.id.container, new EditBirthdayFragment()).commit();
 		}
 	}
 
@@ -38,11 +42,14 @@ public class EditBirthdayActivity extends Activity {
 	/**
 	 * A placeholder fragment containing a simple view.
 	 */
-	public static class PlaceholderFragment extends Fragment {
+	public static class EditBirthdayFragment 
+			extends Fragment
+			implements DatePickerDialog.OnDateSetListener {
 		private static final int SELECT_PHOTO = 100;
+		private TextView birthdayTextView;
 		private ImageView photoImageView;
 
-		public PlaceholderFragment() {
+		public EditBirthdayFragment() {
 		}
 
 		@Override
@@ -51,19 +58,44 @@ public class EditBirthdayActivity extends Activity {
 			View rootView = inflater.inflate(R.layout.fragment_edit_birthday,
 					container, false);
 
+			// Birthday date picker.
+			birthdayTextView = (TextView) rootView.findViewById(R.id.birthdayTextView);
+			birthdayTextView.setOnClickListener(new View.OnClickListener() {
+				@Override
+				public void onClick(View v) {
+					showDatePickerDialog();
+				}
+			});
+
+			// Photo ImageView.
 			photoImageView = (ImageView) rootView.findViewById(R.id.photoImageView);
 			photoImageView.setOnClickListener(new View.OnClickListener() {
 				@Override
 				public void onClick(View v) {
-					Intent photoPickerIntent = new Intent(Intent.ACTION_PICK);
-					photoPickerIntent.setType("image/*");
-					startActivityForResult(photoPickerIntent, SELECT_PHOTO);
+					showPhotoPickerDialog();
 				}
 			});
-
+			
 			return rootView;
 		}
 
+		private void showDatePickerDialog() {
+		    DatePickerDialogFragment datePickerDialogFragment = new DatePickerDialogFragment();
+		    datePickerDialogFragment.setListner(this);
+		    datePickerDialogFragment.show(getFragmentManager(), "datePicker");
+		}
+		
+		public void onDateSet(DatePicker view, int year, int month, int day) {
+			birthdayTextView.setText(month + "-" + day);
+			// TODO(wittek): Set on Model.
+		}
+		
+		private void showPhotoPickerDialog() {
+			Intent photoPickerIntent = new Intent(Intent.ACTION_PICK);
+			photoPickerIntent.setType("image/*");
+			startActivityForResult(photoPickerIntent, SELECT_PHOTO);
+		}
+				
 		@Override
 		public void onActivityResult(int requestCode, int resultCode,
 				Intent imageReturnedIntent) {
