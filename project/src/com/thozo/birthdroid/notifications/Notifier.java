@@ -56,20 +56,24 @@ public class Notifier {
 	}
 
 	private NotificationCompat.Builder manyPersonsNotification() {
+		Person firstPerson = persons.get(0);
 		return new NotificationCompat.Builder(ctx)
 			.setSmallIcon(R.drawable.ic_launcher)
-			.setContentTitle(persons.get(0).name + " and " + (persons.size() - 1)
+			.setContentTitle(firstPerson.name + " and " + (persons.size() - 1)
 					+ (persons.size() > 2 ? "others" : "other")
 					+ " have birthday!")
 			.setContentText("Send them an email to make him feel special.")
+			.setLargeIcon(firstPerson.photo)
 			.setAutoCancel(true);
 	}
 
 	private NotificationCompat.Builder onePersonNotification() {
+		Person person = persons.get(0);
 		return new NotificationCompat.Builder(ctx)
 			.setSmallIcon(R.drawable.ic_launcher)
-			.setContentTitle(persons.get(0).name + " haz birthday!")
+			.setContentTitle(person.name + " haz birthday!")
 			.setContentText("Send him/her an email to make him feel special.")
+			.setLargeIcon(person.photo)
 			.setAutoCancel(true);
 	}
 }
