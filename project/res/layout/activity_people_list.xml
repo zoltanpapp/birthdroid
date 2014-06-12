@@ -9,8 +9,20 @@
     tools:context=".PeopleListActivity" >
 
     <TextView
+        android:id="@+id/currentDateView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:ems="10" />
+
+    <Button
+        android:id="@+id/addBirthdayButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/hello_world" />
+        android:layout_alignLeft="@+id/currentDateView"
+        android:layout_below="@+id/currentDateView"
+        android:text="@string/add_birthday"
+        android:onClick="handleAddBirthdayButtonClick" />
 
 </RelativeLayout>
