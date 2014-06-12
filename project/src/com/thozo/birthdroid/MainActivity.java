@@ -4,7 +4,6 @@ import android.app.Activity;
 import android.content.ComponentName;
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.Menu;
 import android.widget.Toast;
 
 import com.thozo.birthdroid.notifications.NotifierService;
@@ -30,10 +29,5 @@ public class MainActivity extends Activity {
 		// Forward to the PeopleListActivity.
 		Intent intent = new Intent(this, PeopleListActivity.class);
 		startActivity(intent);
-	}
-
-	@Override
-	public boolean onCreateOptionsMenu(Menu menu) {
-		return true;
 	}
 }

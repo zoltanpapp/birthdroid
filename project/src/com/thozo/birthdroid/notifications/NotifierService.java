@@ -53,7 +53,7 @@ public class NotifierService extends IntentService {
 
 		BirthdayOpenHelper helper = new BirthdayOpenHelper(this);
 		Birthdays birthdays = helper.readBirthdays();
-		for (Person person : birthdays.getPeople()) {
+		for (Person person : birthdays.getPersons()) {
 			if (shouldNotify(person)) {
 				Log.i("birthdroid", person.name + " has birthday today");
 				notifier.notifyUser(person);
