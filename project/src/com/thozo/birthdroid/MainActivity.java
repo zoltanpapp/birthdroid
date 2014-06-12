@@ -1,16 +1,11 @@
 package com.thozo.birthdroid;
 
-import java.util.Calendar;
-
 import android.app.Activity;
-import android.app.AlarmManager;
-import android.app.PendingIntent;
 import android.content.ComponentName;
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Menu;
+import android.widget.Toast;
 
 import com.thozo.birthdroid.notifications.NotifierService;
 
@@ -28,9 +23,10 @@ public class MainActivity extends Activity {
 		// Initial trigger of the service.
 		Intent startServiceIntent = new Intent(this, NotifierService.class);
 		ComponentName name = startService(startServiceIntent);
-		Log.i("birthdroid", "name: " + name);
+		if (name == null) {
+			Toast.makeText(this, "Could not trigger service!", Toast.LENGTH_LONG).show();
+		}
 
-		
 		// Forward to the PeopleListActivity.
 		Intent intent = new Intent(this, PeopleListActivity.class);
 		startActivity(intent);
@@ -38,9 +34,6 @@ public class MainActivity extends Activity {
 
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
-		// Inflate the menu; this adds items to the action bar if it is present.
-		getMenuInflater().inflate(R.menu.main, menu);
 		return true;
 	}
-
 }
