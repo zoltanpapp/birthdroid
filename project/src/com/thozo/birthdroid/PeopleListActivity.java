@@ -53,7 +53,7 @@ public class PeopleListActivity extends Activity {
 
 				Intent intent = new Intent(Intent.ACTION_SEND);
 				intent.setType("text/html");
-				// intent.putExtra(Intent.EXTRA_EMAIL, person.email); FIXME
+				intent.putExtra(Intent.EXTRA_EMAIL, person.email);
 				intent.putExtra(Intent.EXTRA_SUBJECT, person.name + ", happy birthday!");
 				intent.putExtra(Intent.EXTRA_TEXT, "Let's go out and get some drinks!");
 				startActivity(intent);
