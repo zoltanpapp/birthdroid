@@ -43,5 +43,23 @@ public class NotifierService extends IntentService {
 		for (Person person : birthdays.getPeople()) {
 			notifier.notifyUser(person);
 		}
+		
+		scheduleAlarm();
+	}
+	
+	private void scheduleAlarm() {
+//		PendingIntent alarmIntent = PendingIntent.getBroadcast(this, 0, startServiceIntent, 0);
+//
+//		// Set the alarm to start at 8:30 a.m.
+//		Calendar calendar = Calendar.getInstance();
+//		calendar.setTimeInMillis(System.currentTimeMillis());
+//		calendar.set(Calendar.HOUR_OF_DAY, 13);
+//		calendar.set(Calendar.MINUTE, 54);
+//
+//		// setRepeating() lets you specify a precise custom interval--in this case,
+//		// 20 minutes.
+//		AlarmManager alarmMgr = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
+//		alarmMgr.setRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(),
+//		        1000 * 60 * 60 * 24, alarmIntent);
 	}
 }

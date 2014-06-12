@@ -4,25 +4,20 @@ import java.util.Date;
 
 import android.app.Activity;
 import android.app.AlertDialog;
-import android.content.ComponentName;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.format.DateFormat;
-import android.util.Log;
 import android.view.Menu;
 import android.view.View;
-import android.widget.Adapter;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.AdapterView.OnItemLongClickListener;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.thozo.birthdroid.model.Birthdays;
-import com.thozo.birthdroid.notifications.NotifierService;
 import com.thozo.birthdroid.model.Person;
 import com.thozo.birthdroid.persistance.BirthdayOpenHelper;
 
@@ -89,9 +84,8 @@ public class PeopleListActivity extends Activity {
 	protected void onStart() {
 		// TODO Auto-generated method stub
 		super.onStart();
-		Intent startServiceIntent = new Intent(this, NotifierService.class);
-		ComponentName name = startService(startServiceIntent);
-		Log.e("birthdroid", "name: " + name);
+		
+
 	}
 	
 	public void handleAddBirthdayButtonClick(View view) {
