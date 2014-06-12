@@ -5,8 +5,11 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 
+import android.widget.BaseAdapter;
+
 public class Birthdays {
 	private List<Person> persons;
+	private List<BaseAdapter> adapters = new ArrayList<BaseAdapter>();
 
 	public Birthdays(Collection<Person> persons) {
 		this.persons = new ArrayList<Person>(persons);
@@ -15,7 +18,14 @@ public class Birthdays {
 	/** Adds a person. */
 	public void addPerson(Person person) {
 		persons.add(person);
+		update();
+	}
+
+	private void update() {
 		Collections.sort(persons);
+		for (BaseAdapter adapter : adapters) {
+			adapter.notifyDataSetChanged();
+		}
 	}
 
 	public List<Person> getPersons() {
@@ -28,9 +38,14 @@ public class Birthdays {
 
 	public void deletePerson(Person person) {
 		persons.remove(person);
+		update();
 	}
 
 	public int size() {
 		return persons.size();
+	}
+	
+	public void attachAdapter(BaseAdapter adapter) {
+		adapters.add(adapter);
 	}
 }
