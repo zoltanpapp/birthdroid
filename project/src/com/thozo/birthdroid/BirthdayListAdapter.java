@@ -23,17 +23,33 @@ public class BirthdayListAdapter extends BaseAdapter {
 
 	@Override
 	public View getView(int position, View convertView, ViewGroup parent) {
-	    LayoutInflater inflater = (LayoutInflater) context
-	        .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-	    TextView view = (TextView) inflater.inflate(R.layout.person_item, parent, false);
-	    Person person = birthdays.getPeople().get(position);
+		if (birthdays.size() > 0) {
+		  return createPersonListItem(position, parent);
+		} else {
+			return createExplanationView(parent);
+		}
+	}
+
+	private View createExplanationView(ViewGroup parent) {
+		LayoutInflater inflater = (LayoutInflater) context
+				.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+		TextView view = (TextView) inflater.inflate(R.layout.explanation_how_to_add_birthdays, parent, false);
+		return view;
+	}
+
+	private View createPersonListItem(int position, ViewGroup parent) {
+		LayoutInflater inflater = (LayoutInflater) context
+				.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+		TextView view = (TextView) inflater.inflate(R.layout.person_item, parent, false);
+		Person person = birthdays.getPerson(position);
 		view.setText(person.name);
 		return view;
 	}
 
 	@Override
 	public int getCount() {
-		return birthdays.getPeople().size();
+		int size = birthdays.size();
+		return size != 0 ? size : 1;
 	}
 
 	@Override

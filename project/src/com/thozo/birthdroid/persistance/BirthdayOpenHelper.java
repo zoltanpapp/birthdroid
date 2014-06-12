@@ -45,7 +45,7 @@ public class BirthdayOpenHelper extends SQLiteOpenHelper {
 		// TODO(wittek): Use transactions... Hahahahah. :)
 		// Bit hacky to clear the whole table, but... why not :)
 		this.getWritableDatabase().delete("birthdays", "", new String[]{});
-		for (Person person : birthdays.getPeople()) {
+		for (Person person : birthdays.getPersons()) {
 			ContentValues values = new ContentValues();
 			values.put("email", person.email);
 			values.put("name", person.name);
