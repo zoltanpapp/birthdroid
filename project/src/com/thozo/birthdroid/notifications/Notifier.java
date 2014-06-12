@@ -60,9 +60,9 @@ public class Notifier {
 		return new NotificationCompat.Builder(ctx)
 			.setSmallIcon(R.drawable.ic_launcher)
 			.setContentTitle(firstPerson.name + " and " + (persons.size() - 1)
-					+ (persons.size() > 2 ? "others" : "other")
+					+ (persons.size() > 2 ? " others" : " other")
 					+ " have birthday!")
-			.setContentText("Send them an email to make him feel special.")
+			.setContentText("Send them an email to make them feel special.")
 			.setLargeIcon(firstPerson.photo)
 			.setAutoCancel(true);
 	}
@@ -72,7 +72,7 @@ public class Notifier {
 		return new NotificationCompat.Builder(ctx)
 			.setSmallIcon(R.drawable.ic_launcher)
 			.setContentTitle(person.name + " haz birthday!")
-			.setContentText("Send him/her an email to make him feel special.")
+			.setContentText("Send him/her an email to make him/her feel special.")
 			.setLargeIcon(person.photo)
 			.setAutoCancel(true);
 	}
